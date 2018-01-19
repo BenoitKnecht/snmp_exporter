@@ -24,6 +24,19 @@ The generator reads in from `generator.yml` and writes to `snmp.yml`.
 
 Additional command are available for debugging, use the `help` command to see them.
 
+## Docker Users
+
+If you would like to run the generator in docker to generate your `snmp.yml` config run the following commands.
+
+```
+docker build -t snmp-generator .
+docker run -ti \
+  -v $HOME/.snmp/mibs:/root/.snmp/mibs \
+  -v $PWD/generator.yml:/opt/generator.yml:ro \
+  -v $PWD/out/:/opt/ \
+  snmp-generator generate
+```
+
 ## File Format
 
 `generator.yml` provides a list of modules. The simplest module is just a name
@@ -104,7 +117,7 @@ Put the extracted mibs in a location NetSNMP can read them from. `$HOME/.snmp/mi
 * UCD-SNMP-MIB (Net-SNMP): http://www.net-snmp.org/docs/mibs/UCD-SNMP-MIB.txt
 * Ubiquiti Networks: http://dl.ubnt-ut.com/snmp/UBNT-MIB
                      http://dl.ubnt-ut.com/snmp/UBNT-UniFi-MIB
-                     https://community.ubnt.com/ubnt/attachments/ubnt/airMAX_FAQ/84/3/ubnt-mib.04.06.2017.zip
+                     https://dl.ubnt.com/firmwares/airos-ubnt-mib/ubnt-mib.zip
 
 https://github.com/librenms/librenms/tree/master/mibs can also be a good source of MIBs.
 
